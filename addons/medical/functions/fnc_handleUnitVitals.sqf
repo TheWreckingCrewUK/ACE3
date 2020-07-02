@@ -103,10 +103,10 @@ if (GVAR(level) == 1) then {
 if (GVAR(level) >= 2) then {
     TRACE_6("ACE_DEBUG_ADVANCED_VITALS",_painStatus,_bloodVolume, _unit getVariable QGVAR(hasPain),_unit getVariable QGVAR(morphine),_syncValues,_unit);
 
-    // Handle pain due tourniquets, that have been applied more than 120 s ago
-    private _oldTourniquets = (_unit getVariable [QGVAR(tourniquets), []]) select {_x > 0 && {CBA_missionTime - _x > 120}};
-    // Increase pain at a rate of 0.001 units/s per old tourniquet
-    _painStatus = _painStatus + (count _oldTourniquets) * 0.001 * _interval;
+    // Handle pain due tourniquets, that have been applied more than 45s ago
+    private _oldTourniquets = (_unit getVariable [QGVAR(tourniquets), []]) select {_x > 0 && {CBA_missionTime - _x > 45}};
+    // Increase pain at a rate of 0.0015 units/s per old tourniquet
+    _painStatus = _painStatus + (count _oldTourniquets) * 0.0015 * _interval;
 
     // Set the vitals
     private _heartRate = (_unit getVariable [QGVAR(heartRate), 80]) + (([_unit] call FUNC(getHeartRateChange)) * _interval);
