@@ -79,4 +79,6 @@ private _decreaseAmount = 1 / _timeInSystem;
 private _viscosityAdjustment = _viscosityChange / _timeInSystem;
 
 // Run the loop that computes the effect of the medication over time
-[_target, _variable, 0, _decreaseAmount, _viscosityAdjustment, _painReduce / _timeInSystem] call FUNC(medicationEffectLoop);
+_pR = 0;
+if (_painReduce > 0) then { _pR = _painReduce; };
+[_target, _variable, 0, _decreaseAmount, _viscosityAdjustment, _pR] call FUNC(medicationEffectLoop);

@@ -78,7 +78,10 @@ if (alive _target) then {
                 [_target, ((_hrIncreaseNorm select 0) + random ((_hrIncreaseNorm select 1) - (_hrIncreaseNorm select 0))), (_hrIncreaseNorm select 2), _hrCallback] call FUNC(addHeartRateAdjustment);
             };
         };
-    };
+    } else {
+		// medication shouldn't work when there's no heart rate
+		_painReduce = 0;
+	};
 };
 
 if (_painReduce > 0) then {
