@@ -19,14 +19,15 @@
 
 params ["_medic", "_patient", "_item"];
 
-if (isNil QGVAR(setting_allowSharedEquipment)) then {
-    GVAR(setting_allowSharedEquipment) = true;
-};
-if (GVAR(setting_allowSharedEquipment) && {[_patient, _item] call EFUNC(common,hasItem)}) exitWith {
+if ([_medic, _item] call EFUNC(common,hasItem)) exitWith {
     true
 };
 
-if ([_medic, _item] call EFUNC(common,hasItem)) exitWith {
+if (isNil QGVAR(setting_allowSharedEquipment)) then {
+    GVAR(setting_allowSharedEquipment) = true;
+};
+
+if (GVAR(setting_allowSharedEquipment) && {[_patient, _item] call EFUNC(common,hasItem)}) exitWith {
     true
 };
 

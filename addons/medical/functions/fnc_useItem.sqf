@@ -24,15 +24,6 @@ if (isNil QGVAR(setting_allowSharedEquipment)) then {
     GVAR(setting_allowSharedEquipment) = true;
 };
 
-if (GVAR(setting_allowSharedEquipment) && {[_patient, _item] call EFUNC(common,hasItem)}) exitWith {
-    if (local _patient) then {
-        ["ace_useItem", [_patient, _item]] call CBA_fnc_localEvent;
-    } else {
-        ["ace_useItem", [_patient, _item], _patient] call CBA_fnc_targetEvent;
-    };
-    [true, _patient];
-};
-
 if ([_medic, _item] call EFUNC(common,hasItem)) exitWith {
     if (local _medic) then {
         ["ace_useItem", [_medic, _item]] call CBA_fnc_localEvent;
@@ -40,6 +31,15 @@ if ([_medic, _item] call EFUNC(common,hasItem)) exitWith {
         ["ace_useItem", [_medic, _item], _medic] call CBA_fnc_targetEvent;
     };
     [true, _medic];
+};
+
+if (GVAR(setting_allowSharedEquipment) && {[_patient, _item] call EFUNC(common,hasItem)}) exitWith {
+    if (local _patient) then {
+        ["ace_useItem", [_patient, _item]] call CBA_fnc_localEvent;
+    } else {
+        ["ace_useItem", [_patient, _item], _patient] call CBA_fnc_targetEvent;
+    };
+    [true, _patient];
 };
 
 private _return = [false, objNull];
